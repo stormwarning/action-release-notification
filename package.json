@@ -1,45 +1,82 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
-  "private": true,
-  "description": "TypeScript template action",
-  "main": "lib/main.js",
-  "scripts": {
-    "build": "tsc",
-    "format": "prettier --write **/*.ts",
-    "format-check": "prettier --check **/*.ts",
-    "lint": "eslint src/**/*.ts",
-    "pack": "ncc build",
-    "test": "jest",
-    "all": "npm run build && npm run format && npm run lint && npm run pack && npm test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
-  },
-  "keywords": [
-    "actions",
-    "node",
-    "setup"
-  ],
-  "author": "YourNameOrOrganization",
-  "license": "MIT",
-  "dependencies": {
-    "@actions/core": "^1.2.0"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.23",
-    "@types/node": "^12.7.12",
-    "@typescript-eslint/parser": "^2.8.0",
-    "@zeit/ncc": "^0.20.5",
-    "eslint": "^5.16.0",
-    "eslint-plugin-github": "^2.0.0",
-    "eslint-plugin-jest": "^22.21.0",
-    "jest": "^24.9.0",
-    "jest-circus": "^24.9.0",
-    "js-yaml": "^3.13.1",
-    "prettier": "^1.19.1",
-    "ts-jest": "^24.2.0",
-    "typescript": "^3.6.4"
-  }
+    "name": "action-release-notification",
+    "version": "0.0.0",
+    "private": true,
+    "description": "TypeScript template action",
+    "keywords": [
+        "actions",
+        "node",
+        "setup"
+    ],
+    "repository": "stormwarning/action-release-notification",
+    "license": "ISC",
+    "author": "YourNameOrOrganization",
+    "scripts": {
+        "all": "npm run build && npm run format && npm run lint && npm run pack && npm test",
+        "build": "tsc",
+        "format": "prettier --write **/*.ts",
+        "format-check": "prettier --check **/*.ts",
+        "format:pkg": "prettier package.json --write",
+        "lint": "eslint '**/*.{js,ts}' --ignore-pattern 'dist/**'",
+        "pack": "ncc build",
+        "test": "jest"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js|ts}": [
+            "eslint --fix",
+            "git add"
+        ],
+        "package.json": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "prettier": {
+        "arrowParens": "always",
+        "semi": false,
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "all"
+    },
+    "dependencies": {
+        "@actions/core": "1.2.2"
+    },
+    "devDependencies": {
+        "@types/jest": "25.1.x",
+        "@types/node": "13.7.x",
+        "@typescript-eslint/eslint-plugin": "2.21.x",
+        "@typescript-eslint/parser": "2.21.x",
+        "@zazen/eslint-config": "2.0.x",
+        "@zeit/ncc": "0.21.1",
+        "eslint": "6.8.x",
+        "eslint-config-prettier": "6.10.x",
+        "eslint-config-standard": "14.1.x",
+        "eslint-plugin-import": "2.20.x",
+        "eslint-plugin-jest": "23.8.x",
+        "eslint-plugin-node": "11.0.x",
+        "eslint-plugin-prettier": "3.1.x",
+        "eslint-plugin-promise": "4.2.x",
+        "husky": "4.2.x",
+        "import-sort-style-python": "1.0.x",
+        "jest": "25.1.x",
+        "jest-circus": "25.1.x",
+        "js-yaml": "3.13.x",
+        "lint-staged": "10.0.x",
+        "prettier": "1.19.x",
+        "prettier-plugin-import-sort": "0.0.3",
+        "prettier-plugin-packagejson": "2.0.x",
+        "ts-jest": "25.2.x",
+        "typescript": "3.8.x"
+    },
+    "importSort": {
+        ".js,.ts,": {
+            "parser": "babylon",
+            "style": "python"
+        }
+    }
 }
