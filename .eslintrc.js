@@ -14,12 +14,12 @@ module.exports = {
     },
     rules: {
         'arrow-parens': ['error', 'always'],
-
         'comma-dangle': ['error', 'always-multiline'],
 
         // Allow async-await
         'generator-star-spacing': 'off',
 
         indent: ['error', 4],
+        'prefer-const': 'off',
     },
 }
