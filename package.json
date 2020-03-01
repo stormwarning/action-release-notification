@@ -2,7 +2,7 @@
     "name": "action-release-notification",
     "version": "0.0.0",
     "private": true,
-    "description": "TypeScript template action",
+    "description": "Send a notification when a new release is published",
     "keywords": [
         "actions",
         "node",
@@ -10,13 +10,13 @@
     ],
     "repository": "stormwarning/action-release-notification",
     "license": "ISC",
-    "author": "YourNameOrOrganization",
+    "author": "Jeff Nelson (https://tidaltheory.co)",
+    "main": "lib/main.js",
     "scripts": {
         "all": "npm run build && npm run format && npm run lint && npm run pack && npm test",
         "build": "tsc",
         "format": "prettier --write **/*.ts",
         "format-check": "prettier --check **/*.ts",
-        "format:pkg": "prettier package.json --write",
         "lint": "eslint '**/*.{js,ts}' --ignore-pattern 'dist/**'",
         "pack": "ncc build",
         "test": "jest"
