@@ -1,19 +1,26 @@
 import * as core from '@actions/core'
 
-import { wait } from './wait'
+import { buildMessage, sendMessage } from './slack'
 
-async function run(): Promise<void> {
+const stringify = (data: any) => JSON.stringify(data, undefined, 2)
+
+const getRequired = (name: string): string =>
+    core.getInput(name, { required: true })
+
+async function run (): Promise<void> {
     try {
-        const ms: string = core.getInput('milliseconds')
-        core.debug(`Waiting ${ms} milliseconds ...`)
+        let token = getRequired('slack-bot-user-oauth-access-token')
+        let channel = getRequired('slack-channel')
+        let text = getRequired('slack-text')
 
-        core.debug(new Date().toTimeString())
-        await wait(parseInt(ms, 10))
-        core.debug(new Date().toTimeString())
+        let message = buildMessage(channel, text)
+        let result = await sendMessage(token, message)
 
-        core.setOutput('time', new Date().toTimeString())
+        let resultAsJson = stringify(result)
+
+        core.setOutput('slack-result', resultAsJson)
     } catch (error) {
-        core.setFailed(error.message)
+        core.setFailed(stringify(error))
     }
 }
 
