@@ -13,7 +13,7 @@ interface Response {
     result: string
 }
 
-function optional () {
+export function optionalParams () {
     let opt: Option = {}
     let { env } = process
 
@@ -29,15 +29,14 @@ function optional () {
     return opt
 }
 
-export const buildMessage = (channel: string, text: string) => {
+export const buildMessage = (channel: string, text: string, optionals: Option = {}) => {
     let message: Message = {
         channel,
         text,
     }
-    let option = optional()
 
-    Object.keys(optional).forEach((name) => {
-        message[name] = option[name]
+    Object.keys(optionals).forEach((name) => {
+        message[name] = optionals[name]
     })
 
     return message
