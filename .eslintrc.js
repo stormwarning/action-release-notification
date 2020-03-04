@@ -20,6 +20,8 @@ module.exports = {
         'generator-star-spacing': 'off',
 
         indent: ['error', 4],
+        'no-unused-vars': 'off',
         'prefer-const': 'off',
+        '@typescript-eslint/no-unused-vars': 'error',
     },
 }
