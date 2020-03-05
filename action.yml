@@ -1,0 +1,16 @@
+name: 'Release notification'
+description: 'Send a notification when a new release is published'
+author: 'Jeff Nelson'
+branding:
+    icon: 'message-circle'
+    color: 'yellow'
+inputs:
+    channel:
+        description: 'The channel to send to'
+        required: true
+    message:
+        description: 'The message to send'
+        required: true
+runs:
+    using: 'node12'
+    main: 'dist/index.js'
