@@ -1311,6 +1311,13 @@ function run() {
                 text: message,
                 blocks: [
                     {
+                        type: 'section',
+                        text: {
+                            type: 'mrkdwn',
+                            text: message,
+                        },
+                    },
+                    {
                         type: 'actions',
                         elements,
                     },
