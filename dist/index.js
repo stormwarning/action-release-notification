@@ -1294,10 +1294,12 @@ const slack_1 = __webpack_require__(570);
 const stringify = (data) => JSON.stringify(data, undefined, 2);
 const getRequired = (name) => core.getInput(name, { required: true });
 function run() {
+    var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let channel = getRequired('channel');
             let message = getRequired('message');
+            let context = core.getInput('context');
             let actions = JSON.parse(core.getInput('actions'));
             let token = process.env.SLACKBOT_TOKEN;
             let slack = new web_api_1.WebClient(token);
@@ -1305,7 +1307,6 @@ function run() {
                 core.setFailed('You must provide a `channel`');
                 return;
             }
-            let elements = actions.map(({ text, url }) => slack_1.buildActionButton({ text, url }));
             let args = {
                 channel,
                 text: message,
@@ -1317,13 +1318,27 @@ function run() {
                             text: message,
                         },
                     },
-                    {
-                        type: 'actions',
-                        elements,
-                    },
                 ],
                 mrkdwn: true,
             };
+            if (context) {
+                (_a = args.blocks) === null || _a === void 0 ? void 0 : _a.push({
+                    type: 'context',
+                    elements: [
+                        {
+                            type: 'mrkdwn',
+                            text: context,
+                        },
+                    ],
+                });
+            }
+            if (actions) {
+                let elements = actions.map(({ text, url }) => slack_1.buildActionButton({ text, url }));
+                (_b = args.blocks) === null || _b === void 0 ? void 0 : _b.push({
+                    type: 'actions',
+                    elements,
+                });
+            }
             let response = yield slack.chat.postMessage(args);
             let resultAsJson = stringify(response);
             core.setOutput('slack-result', resultAsJson);
