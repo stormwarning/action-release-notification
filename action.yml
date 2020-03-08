@@ -11,6 +11,12 @@ inputs:
     message:
         description: 'The message to send'
         required: true
+    context:
+        description: Slack message context
+        required: false
+    actions:
+        description: A JSON array string of Slack Action objects
+        required: false
 runs:
     using: 'node12'
     main: 'dist/index.js'
