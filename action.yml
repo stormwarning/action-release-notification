@@ -11,8 +11,8 @@ inputs:
     message:
         description: 'The message to send'
         required: true
-    context:
-        description: Slack message context
+    pkgdir:
+        description: The directory where package.json is found (if not root)
         required: false
     actions:
         description: A JSON array string of Slack Action objects

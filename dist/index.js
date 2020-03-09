@@ -1288,6 +1288,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const path = __importStar(__webpack_require__(622));
 const core = __importStar(__webpack_require__(470));
 const web_api_1 = __webpack_require__(114);
 const slack_1 = __webpack_require__(570);
@@ -1299,7 +1300,6 @@ function run() {
         try {
             let channel = getRequired('channel');
             let message = getRequired('message');
-            let context = core.getInput('context');
             let actions = JSON.parse(core.getInput('actions'));
             let token = process.env.SLACKBOT_TOKEN;
             let slack = new web_api_1.WebClient(token);
@@ -1321,13 +1321,16 @@ function run() {
                 ],
                 mrkdwn: true,
             };
-            if (context) {
+            let workspace = process.env.GITHUB_WORKSPACE || __dirname;
+            let pkgdir = core.getInput('pkgdir') || '';
+            let { version } = require(path.join(workspace, pkgdir, 'package.json'));
+            if (version) {
                 (_a = args.blocks) === null || _a === void 0 ? void 0 : _a.push({
                     type: 'context',
                     elements: [
                         {
                             type: 'mrkdwn',
-                            text: context,
+                            text: `🔖 ${version.toString()}`,
                         },
                     ],
                 });
@@ -1340,8 +1343,7 @@ function run() {
                 });
             }
             let response = yield slack.chat.postMessage(args);
-            let resultAsJson = stringify(response);
-            core.setOutput('slack-result', resultAsJson);
+            core.setOutput('slack-result', stringify(response));
         }
         catch (error) {
             core.setFailed(stringify(error));

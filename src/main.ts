@@ -1,8 +1,7 @@
+import * as path from 'path'
+
 import * as core from '@actions/core'
-import {
-    ChatPostMessageArguments,
-    WebClient,
-} from '@slack/web-api'
+import { ChatPostMessageArguments, WebClient } from '@slack/web-api'
 
 import { buildActionButton } from './slack'
 
@@ -21,7 +20,6 @@ export async function run (): Promise<void> {
     try {
         let channel = getRequired('channel')
         let message = getRequired('message')
-        let context = core.getInput('context')
         let actions: ButtonOptions[] = JSON.parse(core.getInput('actions'))
         let token = process.env.SLACKBOT_TOKEN
         let slack = new WebClient(token)
@@ -46,13 +44,17 @@ export async function run (): Promise<void> {
             mrkdwn: true,
         }
 
-        if (context) {
+        let workspace = process.env.GITHUB_WORKSPACE || __dirname
+        let pkgdir = core.getInput('pkgdir') || ''
+        let { version } = require(path.join(workspace, pkgdir, 'package.json'))
+
+        if (version) {
             args.blocks?.push({
                 type: 'context',
                 elements: [
                     {
                         type: 'mrkdwn',
-                        text: context,
+                        text: `🔖 ${version.toString()}`,
                     },
                 ],
             })
@@ -69,9 +71,8 @@ export async function run (): Promise<void> {
         }
 
         let response = await slack.chat.postMessage(args)
-        let resultAsJson = stringify(response)
 
-        core.setOutput('slack-result', resultAsJson)
+        core.setOutput('slack-result', stringify(response))
     } catch (error) {
         core.setFailed(stringify(error))
     }
