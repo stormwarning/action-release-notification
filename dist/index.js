@@ -4758,14 +4758,15 @@ function run() {
                 mrkdwn: true,
             };
             let { ref } = github_1.context;
-            let version = /(\d+.\d+.\d+-?[a-z.0-9]*)/.exec(ref);
+            let match = /(\d+.\d+.\d+-?[a-z.0-9]*)/.exec(ref);
+            let version = match ? match[1] : null;
             if (version) {
                 (_a = args.blocks) === null || _a === void 0 ? void 0 : _a.push({
                     type: 'context',
                     elements: [
                         {
                             type: 'mrkdwn',
-                            text: `🔖 ${version.toString()}`,
+                            text: `*🔖 ${version}*`,
                         },
                     ],
                 });
