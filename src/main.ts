@@ -1,6 +1,5 @@
-import * as path from 'path'
-
 import * as core from '@actions/core'
+import { context } from '@actions/github'
 import { ChatPostMessageArguments, WebClient } from '@slack/web-api'
 
 import { buildActionButton } from './slack'
@@ -16,7 +15,7 @@ const stringify = (data: any) => JSON.stringify(data, undefined, 2)
 const getRequired = (name: string): string =>
     core.getInput(name, { required: true })
 
-export async function run (): Promise<void> {
+export async function run(): Promise<void> {
     try {
         let channel = getRequired('channel')
         let message = getRequired('message')
@@ -44,9 +43,8 @@ export async function run (): Promise<void> {
             mrkdwn: true,
         }
 
-        let workspace = process.env.GITHUB_WORKSPACE || __dirname
-        let pkgdir = core.getInput('pkgdir') || ''
-        let { version } = require(path.join(workspace, pkgdir, 'package.json'))
+        let { ref } = context
+        let version = /(\d+.\d+.\d+-?[a-z.0-9]*)/.exec(ref)
 
         if (version) {
             args.blocks?.push({
