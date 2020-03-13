@@ -44,7 +44,8 @@ export async function run(): Promise<void> {
         }
 
         let { ref } = context
-        let version = /(\d+.\d+.\d+-?[a-z.0-9]*)/.exec(ref)
+        let match = /(\d+.\d+.\d+-?[a-z.0-9]*)/.exec(ref)
+        let version = match ? match[1] : null
 
         if (version) {
             args.blocks?.push({
@@ -52,7 +53,7 @@ export async function run(): Promise<void> {
                 elements: [
                     {
                         type: 'mrkdwn',
-                        text: `🔖 ${version.toString()}`,
+                        text: `*🔖 ${version}*`,
                     },
                 ],
             })
