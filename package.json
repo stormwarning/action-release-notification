@@ -10,7 +10,7 @@
     ],
     "repository": "stormwarning/action-release-notification",
     "license": "ISC",
-    "author": "Jeff Nelson (https://tidaltheory.co)",
+    "author": "Jeff Nelson (https://tidaltheory.io)",
     "main": "lib/main.js",
     "scripts": {
         "all": "npm run build && npm run lint && npm run pack && npm test",
