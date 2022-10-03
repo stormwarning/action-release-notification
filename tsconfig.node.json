@@ -8,5 +8,11 @@
 
     "composite": true
   },
-  "include": ["__tests__/*.ts", "src/*.ts", ".eslintrc.cjs", "jest.config.cjs"]
+  "include": [
+    "__tests__/*.ts",
+    "src/*.ts",
+    ".eslintrc.cjs",
+    "jest.config.cjs",
+    "vite.config.js"
+  ]
 }
