@@ -3,23 +3,23 @@ description: 'Send a notification when a new release is published'
 author: 'Jeff Nelson'
 
 branding:
-    icon: 'message-circle'
-    color: 'yellow'
+  icon: 'message-circle'
+  color: 'yellow'
 
 inputs:
-    channel:
-        description: 'The channel to send to'
-        required: true
-    message:
-        description: 'The message to send'
-        required: true
-    pkgdir:
-        description: The directory where package.json is found (if not root)
-        required: false
-    actions:
-        description: A JSON array string of Slack Action objects
-        required: false
+  channel:
+    description: 'The channel to send to'
+    required: true
+  message:
+    description: 'The message to send'
+    required: true
+  pkgdir:
+    description: The directory where package.json is found (if not root)
+    required: false
+  actions:
+    description: A JSON array string of Slack Action objects
+    required: false
 
 runs:
-    using: 'node16'
-    main: 'dist/index.js'
+  using: 'node16'
+  main: 'dist/index.js'

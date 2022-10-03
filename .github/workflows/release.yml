@@ -3,12 +3,12 @@ on: create
 name: Release
 
 jobs:
-    release:
-        name: Release
-        runs-on: ubuntu-latest
-        steps:
-            - name: Release GitHub Action
-              uses: technote-space/release-github-actions@v3
-              with:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  COMMIT_MESSAGE: 'Chore: Build new release'
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release GitHub Action
+        uses: technote-space/release-github-actions@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_MESSAGE: 'Chore: Build new release'
