@@ -15,7 +15,7 @@ const stringify = (data: any) => JSON.stringify(data, undefined, 2)
 const getRequired = (name: string): string =>
     core.getInput(name, { required: true })
 
-export async function run(): Promise<void> {
+export async function run (): Promise<void> {
     try {
         let channel = getRequired('channel')
         let message = getRequired('message')
