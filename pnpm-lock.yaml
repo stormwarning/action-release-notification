@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@actions/core': 1.2.2
+  '@actions/exec': 1.1.1
   '@actions/github': 2.1.1
   '@changesets/changelog-github': 0.4.7
   '@changesets/cli': 2.25.0
@@ -26,6 +27,7 @@ dependencies:
   '@slack/web-api': 5.7.0
 
 devDependencies:
+  '@actions/exec': 1.1.1
   '@changesets/changelog-github': 0.4.7
   '@changesets/cli': 2.25.0
   '@slack/types': 1.3.0
@@ -48,6 +50,12 @@ packages:
     resolution: {integrity: sha512-IbCx7oefq+Gi6FWbSs2Fnw8VkEI6Y4gvjrYprY3RV//ksq/KPMlClOerJ4jRosyal6zkUIc8R9fS/cpRMlGClg==}
     dev: false
 
+  /@actions/exec/1.1.1:
+    resolution: {integrity: sha512-+sCcHHbVdk93a0XT19ECtO/gIXoxvdsgQLzb2fE2/5sIZmWQuluYyjPQtrtTHdU1YzTZ7bAPN4sITq2xi1679w==}
+    dependencies:
+      '@actions/io': 1.1.2
+    dev: true
+
   /@actions/github/2.1.1:
     resolution: {integrity: sha512-kAgTGUx7yf5KQCndVeHSwCNZuDBvPyxm5xKTswW2lofugeuC1AZX73nUUVDNaysnM9aKFMHv9YCdVJbg7syEyA==}
     dependencies:
@@ -64,6 +72,10 @@ packages:
     dependencies:
       tunnel: 0.0.6
     dev: false
+
+  /@actions/io/1.1.2:
+    resolution: {integrity: sha512-d+RwPlMp+2qmBfeLYPLXuSRykDIFEwdTA0MMxzS9kh4kvP1ftrc/9fzy6pX6qAjthdXruHQ6/6kjT/DNo5ALuw==}
+    dev: true
 
   /@ampproject/remapping/2.2.0:
     resolution: {integrity: sha512-qRmjj8nj9qmLTQXXmaR1cck3UXSRMPrbsLJAasZpF+t3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w==}

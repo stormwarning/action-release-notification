@@ -32,6 +32,8 @@ module.exports = {
 				],
 				'@typescript-eslint/no-unsafe-assignment': 'off',
 				'@typescript-eslint/no-unsafe-call': 'off',
+
+				'import/no-extraneous-dependencies': 'off',
 			},
 		},
 	],
