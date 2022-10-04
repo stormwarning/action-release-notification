@@ -1,6 +1,6 @@
 {
   "name": "action-release-notification",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": true,
   "description": "Send a notification when a new release is published",
   "keywords": [
@@ -18,7 +18,7 @@
     "build": "vite build",
     "changeset": "changeset add",
     "lint": "eslint '**/*.{c?js,ts}' --ignore-pattern 'dist/**'",
-    "release": "node --experimental-import-meta-resolve ./scripts/release.js",
+    "release": "node ./scripts/release.js",
     "test": "vitest run"
   },
   "husky": {
