@@ -1,14 +1,39 @@
-on: create
-
 name: Release
 
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  release:
-    name: Release
+  changesets:
     runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
-      - name: Release GitHub Action
-        uses: technote-space/release-github-actions@v3
+      # https://github.com/actions/checkout
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # https://github.com/actions/setup-node
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_MESSAGE: 'Chore: Build new release'
+          node-version: 16.x
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: npx pnpm install --frozen-lockfile
+
+      - name: Build
+        run: npm run build
+
+      # https://github.com/changesets/action
+      - name: Create release PR or publish
+        uses: changesets/action@v1
+        with:
+          publish: npm run release
+          commit: 'Chore: Publish release'
+          title: 'Chore: Publish release'

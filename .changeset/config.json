@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
+  "access": "restricted",
+  "baseBranch": "main",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "stormwarning/action-release-notification" }
+  ],
+  "commit": false,
+  "fixed": [],
+  "ignore": [],
+  "linked": [],
+  "updateInternalDependencies": "patch"
+}

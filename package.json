@@ -1,6 +1,6 @@
 {
   "name": "action-release-notification",
-  "version": "0.0.0",
+  "version": "4.0.0",
   "private": true,
   "description": "Send a notification when a new release is published",
   "keywords": [
@@ -14,12 +14,11 @@
   "type": "module",
   "main": "dist/main.cjs",
   "scripts": {
-    "all": "npm run build && npm run lint && npm run pack && npm test",
+    "all": "npm run build && npm run lint && npm test",
     "build": "vite build",
-    "format": "prettier --write **/*.ts",
-    "format-check": "prettier --check **/*.ts",
-    "lint": "eslint '**/*.{js,ts}' --ignore-pattern 'dist/**'",
-    "pack": "ncc build",
+    "changeset": "changeset add",
+    "lint": "eslint '**/*.{c?js,ts}' --ignore-pattern 'dist/**'",
+    "release": "node ./scripts/release.js",
     "test": "vitest run"
   },
   "husky": {
@@ -28,7 +27,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts}": [
+    "*.{c?js,ts}": [
       "eslint --fix",
       "prettier --write"
     ],
@@ -48,6 +47,8 @@
     "@slack/web-api": "5.7.0"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "0.4.7",
+    "@changesets/cli": "2.25.0",
     "@slack/types": "1.3.0",
     "@types/node": "18.8.0",
     "@zazen/eslint-config": "6.0.0",
@@ -63,7 +64,7 @@
     "vitest": "0.23.4"
   },
   "importSort": {
-    ".js,.ts,": {
+    ".js,.cjs,.ts,": {
       "parser": "babylon",
       "style": "python"
     }

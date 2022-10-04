@@ -1,23 +1,28 @@
-name: 'build-test'
-on: # rebuild any PRs and main branch changes
-  pull_request:
-  push:
-    branches:
-      - master
-      - 'releases/*'
+name: CI
+
+on: [push]
 
 jobs:
-  build: # make sure build/ci work properly
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - run: |
-          npm install
-          npm run all
-  test: # make sure the action works on a clean machine without building
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: ./
+      # https://github.com/actions/checkout
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # https://github.com/actions/setup-node
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
         with:
-          milliseconds: 1000
+          node-version: 16.x
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: npx pnpm install --frozen-lockfile
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm run test

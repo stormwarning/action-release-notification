@@ -22,4 +22,17 @@ module.exports = {
 			{ allowList: { args: true } },
 		],
 	},
+	overrides: [
+		{
+			files: '**/*.js',
+			rules: {
+				'@typescript-eslint/restrict-template-expressions': [
+					'error',
+					{ allowAny: true },
+				],
+				'@typescript-eslint/no-unsafe-assignment': 'off',
+				'@typescript-eslint/no-unsafe-call': 'off',
+			},
+		},
+	],
 }

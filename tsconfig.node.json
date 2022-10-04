@@ -10,6 +10,7 @@
   },
   "include": [
     "__tests__/*.ts",
+    "scripts/*.js",
     "src/*.ts",
     ".eslintrc.cjs",
     "jest.config.cjs",
