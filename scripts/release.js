@@ -3,7 +3,8 @@ import process from 'node:process'
 
 import { exec, getExecOutput } from '@actions/exec'
 
-import { version } from '../package.json'
+const require = createRequire(import.meta.url)
+const { version } = require('../package.json')
 
 const tag = `v${version}`
 const majorVersion = `v${version.split('.')[0]}`
