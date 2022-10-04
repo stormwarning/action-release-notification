@@ -10,7 +10,7 @@ const { version } = require('../package.json')
 const tag = `v${version}`
 const majorVersion = `v${version.split('.')[0]}`
 
-process.chdir(path.join(new URL('..', import.meta.url)))
+process.chdir(await import.meta.resolve('..', import.meta.url))
 
 async function release() {
 	let { exitCode, stderr } = await getExecOutput(
