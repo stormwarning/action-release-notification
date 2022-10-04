@@ -18,7 +18,7 @@
     "build": "vite build",
     "changeset": "changeset add",
     "lint": "eslint '**/*.{c?js,ts}' --ignore-pattern 'dist/**'",
-    "release": "node ./scripts/release.js",
+    "release": "node --experimental-import-meta-resolve ./scripts/release.js",
     "test": "vitest run"
   },
   "husky": {
